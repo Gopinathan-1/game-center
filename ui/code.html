@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEXUS ARENA | Luxury Gaming Cafe &amp; Social Lounge</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;family=Sora:ital,wght@0,400;0,600;0,700;0,800;1,800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Scripts -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-highest": "#403132",
+                "on-secondary": "#003641",
+                "secondary-container": "#00aac7",
+                "surface-container-lowest": "#170b0c",
+                "secondary-fixed-dim": "#55d6f5",
+                "tertiary": "#9bcaff",
+                "on-primary-container": "#5a001b",
+                "on-primary": "#670020",
+                "primary-container": "#f55a77",
+                "secondary": "#55d6f5",
+                "primary-fixed": "#ffd9dc",
+                "tertiary-fixed-dim": "#9bcaff",
+                "inverse-surface": "#f5ddde",
+                "on-primary-fixed-variant": "#900532",
+                "inverse-on-surface": "#3c2d2e",
+                "on-background": "#f5ddde",
+                "surface-container-low": "#251819",
+                "outline": "#a7898c",
+                "secondary-fixed": "#adecff",
+                "on-tertiary-container": "#002c4b",
+                "tertiary-container": "#1e96ed",
+                "outline-variant": "#584143",
+                "error": "#ffb4ab",
+                "on-error": "#690005",
+                "on-error-container": "#ffdad6",
+                "on-secondary-fixed": "#001f26",
+                "error-container": "#93000a",
+                "surface-container-high": "#352628",
+                "on-tertiary": "#003256",
+                "on-tertiary-fixed": "#001d35",
+                "surface-variant": "#403132",
+                "on-secondary-fixed-variant": "#004e5d",
+                "primary-fixed-dim": "#ffb2ba",
+                "inverse-primary": "#b12648",
+                "surface-dim": "#1c1011",
+                "primary": "#ffb2ba",
+                "background": "#1c1011",
+                "surface": "#1c1011",
+                "surface-container": "#2a1c1d",
+                "tertiary-fixed": "#d0e4ff",
+                "surface-tint": "#ffb2ba",
+                "surface-bright": "#453537",
+                "on-secondary-container": "#003944",
+                "on-tertiary-fixed-variant": "#004a7a",
+                "on-surface-variant": "#e0bec1",
+                "on-surface": "#f5ddde",
+                "on-primary-fixed": "#400011"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "container-max": "1440px",
+                "unit": "8px",
+                "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                "label-md": ["jetbrainsMono"],
+                "display-xl": ["sora"],
+                "display-lg": ["sora"],
+                "headline-lg": ["sora"],
+                "headline-lg-mobile": ["sora"],
+                "label-sm": ["jetbrainsMono"],
+                "body-lg": ["inter"],
+                "headline-md": ["sora"],
+                "body-md": ["inter"]
+            },
+            "fontSize": {
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                "display-xl": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #1c1011; scroll-behavior: smooth; }
+        .glass-panel {
+            background: rgba(23, 11, 12, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 178, 186, 0.1);
+        }
+        .neon-glow-primary:hover {
+            box-shadow: 0 0 30px rgba(234, 82, 111, 0.3);
+        }
+        .neon-glow-secondary:hover {
+            box-shadow: 0 0 30px rgba(35, 181, 211, 0.3);
+        }
+        .neon-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(234, 82, 111, 0.5), transparent);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #ffb2ba; border-radius: 10px; }
+    </style>
+</head>
+<body class="text-on-surface overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop h-20 max-w-container-max mx-auto bg-background/80 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex items-center gap-12">
+<span class="font-display-lg text-headline-md tracking-tighter text-primary italic font-black">NEXUS ARENA</span>
+<div class="hidden md:flex gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Experience</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md text-label-md" href="#">Events</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md text-label-md" href="#">Membership</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md text-label-md" href="#">Cafe Menu</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">search</button>
+<button class="bg-primary-container text-on-primary-fixed font-label-md text-label-md px-6 py-2.5 rounded-DEFAULT font-bold hover:opacity-80 transition-all scale-95 active:scale-90">Book Table</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center px-margin-desktop pt-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Luxury Cafe Background" class="w-full h-full object-cover opacity-40" data-alt="A cinematic wide-angle shot of a luxury gaming cafe interior. Features high-end mahogany wood coffee stations, soft ambient neon pink lighting, and plush velvet ergonomic lounge chairs arranged in cozy social groups. Steam rises from a professional espresso machine in the background. The atmosphere is sophisticated and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfN_eW-fPIn5-S_q6-N0yK2Jc8H3Z6X0H0m9V-lR8_X-Z3T5Y7I4L9N1S2G3F4-H5J6K7L8M9N0P1Q2R3S4T5U6V7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-4xl">
+<span class="font-label-md text-label-md text-secondary tracking-widest mb-4 block">REDEFINE YOUR SOCIAL PLAY</span>
+<h1 class="font-display-xl text-display-xl italic text-on-surface leading-tight mb-8">
+            THE ULTIMATE <br/> SOCIAL <span class="text-primary">LOUNGE</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-12">
+            Experience the world's most advanced luxury gaming cafe. High-performance play meets artisanal hospitality in our curated lounge environment.
+        </p>
+<div class="flex flex-wrap gap-6">
+<button class="px-10 py-5 bg-primary text-on-primary font-label-md text-label-md rounded-DEFAULT font-bold transition-all hover:scale-105 neon-glow-primary">
+                Reserve a Spot
+            </button>
+<button class="px-10 py-5 border border-primary/40 text-primary font-label-md text-label-md rounded-DEFAULT font-bold transition-all hover:bg-primary/5 hover:border-primary">
+                Explore Menu
+            </button>
+</div>
+</div>
+</section>
+<!-- Cafe Experience -->
+<section class="py-24 px-margin-desktop">
+<div class="flex justify-between items-end mb-16">
+<div>
+<h2 class="font-display-lg text-display-lg mb-4">CAFE EXPERIENCE</h2>
+<div class="w-24 h-1 bg-secondary"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs text-right">
+            Explore our sophisticated social spaces designed for the discerning gamer.
+        </p>
+</div>
+<div class="flex gap-gutter overflow-x-auto pb-12 custom-scrollbar snap-x">
+<!-- Experience Cards -->
+<div class="min-w-[400px] snap-start group relative overflow-hidden rounded-xl border border-outline-variant/30 aspect-[3/4]">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A high-end social gaming lounge with comfortable leather sofas and coffee tables with integrated touchscreens. Low-key atmospheric lighting and a view of a sleek cocktail and coffee bar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfN_eW-fPIn5-S_q6-N0yK2Jc8H3Z6X0H0m9V-lR8_X-Z3T5Y7I4L9N1S2G3F4-H5J6K7L8M9N0P1Q2R3S4T5U6V7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent opacity-90"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="font-label-sm text-label-sm text-secondary mb-2 block">CRAFTED COMFORT</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Premium Lounge</h3>
+</div>
+</div>
+<div class="min-w-[400px] snap-start group relative overflow-hidden rounded-xl border border-outline-variant/30 aspect-[3/4]">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Semi-enclosed immersive gaming booths with acoustic dampening panels and high-end peripherals. The booths are stylishly integrated into a larger architectural cafe space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfN_eW-fPIn5-S_q6-N0yK2Jc8H3Z6X0H0m9V-lR8_X-Z3T5Y7I4L9N1S2G3F4-H5J6K7L8M9N0P1Q2R3S4T5U6V7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent opacity-90"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="font-label-sm text-label-sm text-secondary mb-2 block">PRIVATE IMMERSION</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Immersive Booths</h3>
+</div>
+</div>
+<div class="min-w-[400px] snap-start group relative overflow-hidden rounded-xl border border-outline-variant/30 aspect-[3/4]">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Sleek, individual private pods for streaming or focused gaming, featuring high-end ergonomic setups and custom lighting, situated within a luxury dark-themed cafe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfN_eW-fPIn5-S_q6-N0yK2Jc8H3Z6X0H0m9V-lR8_X-Z3T5Y7I4L9N1S2G3F4-H5J6K7L8M9N0P1Q2R3S4T5U6V7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent opacity-90"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="font-label-sm text-label-sm text-secondary mb-2 block">CREATOR READY</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Private Pods</h3>
+</div>
+</div>
+<div class="min-w-[400px] snap-start group relative overflow-hidden rounded-xl border border-outline-variant/30 aspect-[3/4]">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A high-end barista station in a luxury gaming cafe. Polished chrome espresso machine, designer cups, and a selection of premium beans under soft spotlighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfN_eW-fPIn5-S_q6-N0yK2Jc8H3Z6X0H0m9V-lR8_X-Z3T5Y7I4L9N1S2G3F4-H5J6K7L8M9N0P1Q2R3S4T5U6V7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent opacity-90"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="font-label-sm text-label-sm text-secondary mb-2 block">ARTISAL TASTE</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Artisan Coffee Bar</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- Community Event Showcase -->
+<section class="py-24 bg-surface-container-low/30 relative">
+<div class="max-w-container-max mx-auto px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full mb-6">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase">Starting Soon</span>
+</div>
+<h2 class="font-display-lg text-display-lg mb-6 leading-tight">COMMUNITY<br/>STREAM NIGHT</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10">
+                Join our weekly social mixer. Watch the top community creators battle it out on the big screen while enjoying our signature hand-crafted brews.
+            </p>
+<div class="glass-panel p-8 rounded-xl border-l-4 border-l-primary">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center font-bold text-primary italic">NL</div>
+<span class="font-headline-md text-headline-md">NEXUS LEGENDS</span>
+</div>
+<span class="font-label-md text-label-md text-secondary">LIVE</span>
+</div>
+<div class="h-px bg-outline-variant/20 mb-8"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4 opacity-50">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center font-bold italic">CH</div>
+<span class="font-headline-md text-headline-md">COFFEE HEROES</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">NEXT</span>
+</div>
+</div>
+</div>
+<div class="relative aspect-video rounded-xl overflow-hidden glass-panel group">
+<img alt="Social Event" class="w-full h-full object-cover" data-alt="A relaxed social gaming event in a high-end cafe. People are chatting on comfortable sofas while a large screen shows a cinematic game stream. Soft, warm lighting and a refined atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfN_eW-fPIn5-S_q6-N0yK2Jc8H3Z6X0H0m9V-lR8_X-Z3T5Y7I4L9N1S2G3F4-H5J6K7L8M9N0P1Q2R3S4T5U6V7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<button class="w-20 h-20 bg-primary rounded-full flex items-center justify-center transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-on-primary text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Membership Section -->
+<section class="py-32 px-margin-desktop">
+<div class="text-center max-w-2xl mx-auto mb-20">
+<h2 class="font-display-lg text-display-lg mb-6">LOUNGE PRIVILEGES</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Unlock complimentary brews, priority seating, and access to the exclusive NEXUS social circle.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-gutter">
+<!-- Community -->
+<div class="glass-panel p-10 rounded-xl flex flex-col hover:-translate-y-2 transition-transform duration-500">
+<h3 class="font-label-md text-label-md text-secondary tracking-widest mb-2">MEMBER</h3>
+<div class="font-headline-lg text-headline-lg mb-8">Social</div>
+<div class="text-display-lg font-bold mb-10">$29<span class="text-label-md text-on-surface-variant">/MO</span></div>
+<ul class="space-y-4 mb-12 flex-grow">
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                    Daily Lounge Access
+                </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                    1 Free Daily Coffee
+                </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                    Event Access
+                </li>
+</ul>
+<button class="w-full py-4 border border-secondary/30 text-secondary font-bold font-label-md text-label-md hover:bg-secondary/10 transition-colors">JOIN CLUB</button>
+</div>
+<!-- Pro -->
+<div class="glass-panel p-10 rounded-xl flex flex-col relative border-primary/30 hover:-translate-y-2 transition-transform duration-500 scale-105 bg-surface-container-low/50">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-1 font-label-sm text-label-sm rounded-full">RECOMMENDED</div>
+<h3 class="font-label-md text-label-md text-primary tracking-widest mb-2">RESERVE</h3>
+<div class="font-headline-lg text-headline-lg mb-8">Premium</div>
+<div class="text-display-lg font-bold mb-10">$79<span class="text-label-md text-on-surface-variant">/MO</span></div>
+<ul class="space-y-4 mb-12 flex-grow">
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    Priority Table Booking
+                </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    Unlimited Signature Brews
+                </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    Private Pod Hours (4h/week)
+                </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    Exclusive Tasting Events
+                </li>
+</ul>
+<button class="w-full py-4 bg-primary text-on-primary font-bold font-label-md text-label-md hover:opacity-90 transition-opacity neon-glow-primary">GO PREMIUM</button>
+</div>
+<!-- Elite -->
+<div class="glass-panel p-10 rounded-xl flex flex-col hover:-translate-y-2 transition-transform duration-500">
+<h3 class="font-label-md text-label-md text-secondary tracking-widest mb-2">ULTIMATE</h3>
+<div class="font-headline-lg text-headline-lg mb-8">Elite</div>
+<div class="text-display-lg font-bold mb-10">$199<span class="text-label-md text-on-surface-variant">/MO</span></div>
+<ul class="space-y-4 mb-12 flex-grow">
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                    24/7 Private Lounge Access
+                </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                    Dedicated Concierge Barista
+                </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                    Secret Menu Access
+                </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                    Private Booth Priority
+                </li>
+</ul>
+<button class="w-full py-4 border border-secondary/30 text-secondary font-bold font-label-md text-label-md hover:bg-secondary/10 transition-colors">REQUEST ACCESS</button>
+</div>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="py-24 px-margin-desktop bg-surface-container-lowest">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+<div>
+<div class="font-display-lg text-display-lg text-primary mb-2">25K+</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Brews Served</div>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-secondary mb-2">500K+</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Hours Relaxed</div>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-primary mb-2">120+</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Social Events</div>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-secondary mb-2">15K+</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Lounge Members</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-32 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary opacity-5"></div>
+<div class="relative z-10 text-center px-margin-desktop">
+<h2 class="font-display-xl text-display-xl mb-12 italic tracking-tighter">Sip. Play. Socialize.</h2>
+<button class="px-12 py-6 bg-primary text-on-primary font-bold font-label-md text-label-md rounded-DEFAULT hover:scale-105 transition-transform neon-glow-primary">Experience Nexus</button>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-display-lg text-headline-md text-primary italic font-black">NEXUS ARENA</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-70">© 2024 NEXUS LUXURY GAMING CAFE. ALL RIGHTS RESERVED.</span>
+</div>
+<div class="flex gap-8">
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-secondary transition-colors" href="#">House Rules</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-secondary transition-colors" href="#">Cafe Menu</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-secondary transition-colors" href="#">Booking Policy</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-all">public</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-all">share</span>
+</div>
+</footer>
+<script>
+    // Micro-interactions for scrolling reveals
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                entry.target.classList.remove('opacity-0', 'translate-y-10');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+        observer.observe(section);
+    });
+</script>
+</body></html>
