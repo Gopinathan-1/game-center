@@ -172,6 +172,7 @@ export async function POST(request: Request) {
       sent: emailResult.success,
       messageId: emailResult.messageId,
       error: emailResult.error,
+    },
     message:
       uniqueSlotStarts.length === 1
         ? "Your slot is booked. We will see you at Nexus Cafe."
