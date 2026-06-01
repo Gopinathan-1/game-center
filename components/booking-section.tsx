@@ -90,6 +90,7 @@ export default function BookingSection() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [notice, setNotice] = useState("");
+  const [notificationWarning, setNotificationWarning] = useState("");
   const [error, setError] = useState("");
 
   const selectedSlotStatus = useMemo(() => {
@@ -109,6 +110,7 @@ export default function BookingSection() {
       setLoading(true);
       setError("");
       setNotice("");
+      setNotificationWarning("");
       setSelectedSlots([]);
       setSlots(createSlotsForDate(bookingDate));
 
@@ -151,6 +153,7 @@ export default function BookingSection() {
     setSubmitting(true);
     setError("");
     setNotice("");
+    setNotificationWarning("");
 
     try {
       const response = await fetch("/api/booking/book", {
@@ -170,6 +173,12 @@ export default function BookingSection() {
       }
 
       setNotice(payload.message ?? "Your slot is booked.");
+      if (payload.ownerNotification && !payload.ownerNotification.delivered) {
+        setNotificationWarning(
+          payload.ownerNotification.error ??
+            "Booking saved, but the WhatsApp owner notification was not delivered.",
+        );
+      }
       setCustomerName("");
       setMobileNumber("");
       const bookedSlotStarts = new Set(selectedSlots.map((slot) => slot.slotStart));
@@ -357,13 +366,18 @@ export default function BookingSection() {
                       : "Book Selected Slot"}
                 </button>
               </div>
-              {(notice || error) && (
+              {(notice || error || notificationWarning) && (
                 <p
                   className={`text-sm sm:col-span-2 ${
                     error ? "text-[#ffb2ba]" : "text-[#55d6f5]"
                   }`}
                 >
                   {error || notice}
+                  {notificationWarning && (
+                    <span className="mt-2 block text-[#ffb2ba]">
+                      WhatsApp notification: {notificationWarning}
+                    </span>
+                  )}
                 </p>
               )}
             </motion.form>

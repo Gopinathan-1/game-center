@@ -88,7 +88,7 @@ const sendOwnerWhatsAppMessage = async (message: string) => {
     };
   }
 
-  const response = await fetch(notifierUrl, {
+  const response = await fetch(`${notifierUrl}/send-booking`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
