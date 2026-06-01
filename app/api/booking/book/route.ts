@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import { sendBookingConfirmationEmail } from "@/utils/email/resend";
 import { cookies } from "next/headers";
 
 const allowedSlots = new Set(
@@ -217,6 +218,15 @@ export async function POST(request: Request) {
 
   const whatsAppResult = await sendOwnerWhatsAppMessage(ownerMessage);
 
+  // Send booking confirmation email to customer
+  const emailResult = await sendBookingConfirmationEmail({
+    customerName,
+    customerEmail: process.env.CUSTOMER_EMAIL_TO || "",
+    bookingDate,
+    slotLabels,
+    mobileNumber,
+  });
+
   await supabase.from("owner_notifications").insert({
     booking_id: bookings?.[0]?.id ?? null,
     message: ownerMessage,
@@ -242,6 +252,11 @@ export async function POST(request: Request) {
         message: ownerMessage,
         bookings,
       }),
+    emailNotification: {
+      sent: emailResult.success,
+      messageId: emailResult.messageId,
+      error: emailResult.error,
+    },
     }).catch(() => undefined);
   }
 
