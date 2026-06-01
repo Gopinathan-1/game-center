@@ -12,6 +12,28 @@ interface BookingConfirmationData {
 
 export const sendBookingConfirmationEmail = async (data: BookingConfirmationData) => {
   try {
+    // Validate API key
+    if (!process.env.RESEND_API_KEY) {
+      const errorMsg = "RESEND_API_KEY environment variable is not set";
+      console.error("❌", errorMsg);
+      return {
+        success: false,
+        messageId: null,
+        error: errorMsg,
+      };
+    }
+
+    // Validate email address
+    if (!data.customerEmail || !data.customerEmail.includes("@")) {
+      const errorMsg = `Invalid email address: ${data.customerEmail}`;
+      console.error("❌", errorMsg);
+      return {
+        success: false,
+        messageId: null,
+        error: errorMsg,
+      };
+    }
+
     const { customerName, customerEmail, bookingDate, slotLabels, mobileNumber } = data;
 
     const htmlContent = `
@@ -21,43 +43,23 @@ export const sendBookingConfirmationEmail = async (data: BookingConfirmationData
           <style>
             body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background-color: #4B69F0; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+            .header { background-color: #4B69F0; color: white; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; }
             .content { background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 0 0 8px 8px; }
             .booking-details { background-color: white; padding: 15px; border-left: 4px solid #4B69F0; margin: 15px 0; }
             .label { font-weight: bold; color: #4B69F0; }
-            .footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666; }
           </style>
         </head>
         <body>
           <div class="container">
             <div class="header">
-              <h1 style="margin: 0;">Booking Confirmed ✓</h1>
-              <p style="margin: 5px 0 0 0;">Nexus Arena Cafe</p>
+              <h1 style="margin: 0; font-size: 24px;">Booking Confirmed ✓</h1>
             </div>
             
             <div class="content">
-              <p>Hello <strong>${customerName}</strong>,</p>
-              
-              <p>Your booking has been confirmed! We look forward to seeing you at Nexus Arena Cafe.</p>
-              
               <div class="booking-details">
-                <div><span class="label">Date:</span> ${bookingDate}</div>
-                <div style="margin-top: 10px;"><span class="label">Time Slots:</span></div>
-                <ul style="margin: 5px 0; padding-left: 20px;">
-                  ${slotLabels.map((slot) => `<li>${slot}</li>`).join("")}
-                </ul>
-                <div style="margin-top: 10px;"><span class="label">Contact:</span> ${mobileNumber}</div>
-              </div>
-              
-              <p style="margin-top: 20px; color: #666;">
-                Please arrive 5-10 minutes before your first slot time. If you need to cancel or reschedule, 
-                please contact us at your earliest convenience.
-              </p>
-              
-              <p>Thank you for choosing Nexus Arena Cafe!</p>
-              
-              <div class="footer">
-                <p>This is an automated confirmation email. Please do not reply to this email.</p>
+                <p><span class="label">Name:</span> ${customerName}</p>
+                <p><span class="label">Time Slot:</span> ${slotLabels.join(", ")}</p>
+                <p><span class="label">Contact:</span> ${mobileNumber}</p>
               </div>
             </div>
           </div>
@@ -65,18 +67,15 @@ export const sendBookingConfirmationEmail = async (data: BookingConfirmationData
       </html>
     `;
 
-    // Format the from address properly for Resend
-    const fromEmail = process.env.CUSTOMER_EMAIL_FROM || "onboarding@resend.dev";
-    const fromAddress = fromEmail.includes("@gmail.com") 
-      ? `Nexus Arena <${fromEmail}>` 
-      : fromEmail;
-
-    const toEmail = customerEmail || process.env.CUSTOMER_EMAIL_TO || "";
+    // Use the from address from env
+    const fromAddress = process.env.CUSTOMER_EMAIL_FROM || "Nexus Cafe <onboarding@resend.dev>";
+    const toEmail = customerEmail;
 
     console.log("📧 Sending booking confirmation email", {
       from: fromAddress,
       to: toEmail,
       subject: `Booking Confirmed - Nexus Arena Cafe - ${bookingDate}`,
+      apiKeyExists: !!process.env.RESEND_API_KEY,
     });
 
     const response = await resend.emails.send({
@@ -86,16 +85,37 @@ export const sendBookingConfirmationEmail = async (data: BookingConfirmationData
       html: htmlContent,
     });
 
-    console.log("✅ Email sent successfully", { messageId: response.data?.id });
+    console.log("📧 Resend API Response:", JSON.stringify(response, null, 2));
 
+    // Check if response has an error
+    if (response.error) {
+      console.error("❌ Resend error:", response.error);
+      return {
+        success: false,
+        messageId: null,
+        error: response.error.message || JSON.stringify(response.error),
+      };
+    }
+
+    // Check if we got a message ID
+    if (response.data?.id) {
+      console.log("✅ Email sent successfully with ID:", response.data.id);
+      return {
+        success: true,
+        messageId: response.data.id,
+        error: null,
+      };
+    }
+
+    console.warn("⚠️ Unexpected response structure:", response);
     return {
-      success: true,
-      messageId: response.data?.id,
-      error: null,
+      success: false,
+      messageId: null,
+      error: "Unexpected response from Resend API",
     };
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
-    console.error("❌ Email sending failed", { error: errorMessage });
+    console.error("❌ Email sending failed:", error);
     return {
       success: false,
       messageId: null,
