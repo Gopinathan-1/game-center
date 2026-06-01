@@ -77,57 +77,6 @@ const getSlotLabel = (slotStart: string) => {
   return `${start} - ${end}`;
 };
 
-const sendOwnerWhatsAppMessage = async (message: string) => {
-  const ownerNumber = process.env.OWNER_WHATSAPP_NUMBER;
-  const notifierUrl = process.env.WHATSAPP_NOTIFIER_URL;
-
-  if (!ownerNumber || !notifierUrl) {
-    return {
-      delivered: false,
-      error:
-        "WhatsApp notifier is not configured. Set OWNER_WHATSAPP_NUMBER and WHATSAPP_NOTIFIER_URL.",
-    };
-  }
-
-  const response = await fetch(`${notifierUrl}/send-booking`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      phone: ownerNumber,
-      message,
-    }),
-  }).catch((error) => {
-    return {
-      ok: false,
-      status: 503,
-      json: async () => ({
-        error:
-          error instanceof Error
-            ? error.message
-            : "WhatsApp notifier is not reachable.",
-      }),
-    } as Response;
-  });
-
-  if (!response.ok) {
-    const payload = await response.json().catch(() => null);
-
-    return {
-      delivered: false,
-      error:
-        payload?.error ??
-        `WhatsApp notifier request failed with status ${response.status}.`,
-    };
-  }
-
-  const payload = await response.json();
-
-  return {
-    delivered: true,
-    response: payload,
-  };
-};
-
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const customerName = String(body?.customerName ?? "").trim();
@@ -207,16 +156,6 @@ export async function POST(request: Request) {
   }
 
   const slotLabels = uniqueSlotStarts.map(getSlotLabel);
-  const ownerMessage = [
-    "New Nexus Cafe booking",
-    "",
-    `Name: ${customerName}`,
-    `Mobile: ${mobileNumber}`,
-    `Date: ${bookingDate}`,
-    `Slots: ${slotLabels.join(", ")}`,
-  ].join("\n");
-
-  const whatsAppResult = await sendOwnerWhatsAppMessage(ownerMessage);
 
   // Send booking confirmation email to customer
   const emailResult = await sendBookingConfirmationEmail({
@@ -227,45 +166,12 @@ export async function POST(request: Request) {
     mobileNumber,
   });
 
-  await supabase.from("owner_notifications").insert({
-    booking_id: bookings?.[0]?.id ?? null,
-    message: ownerMessage,
-    delivered: whatsAppResult.delivered,
-    payload: {
-      customerName,
-      mobileNumber,
-      bookingDate,
-      slotStarts: uniqueSlotStarts,
-      slotLabels,
-      bookings,
-      ownerWhatsAppNumber: process.env.OWNER_WHATSAPP_NUMBER ?? null,
-      whatsAppResult,
-    },
-  });
-
-  const webhookUrl = process.env.OWNER_NOTIFICATION_WEBHOOK_URL;
-  if (webhookUrl) {
-    await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message: ownerMessage,
-        bookings,
-      }),
+  return NextResponse.json({
+    bookings,
     emailNotification: {
       sent: emailResult.success,
       messageId: emailResult.messageId,
       error: emailResult.error,
-    },
-    }).catch(() => undefined);
-  }
-
-  return NextResponse.json({
-    bookings,
-    ownerNotification: {
-      delivered: whatsAppResult.delivered,
-      error: whatsAppResult.delivered ? null : whatsAppResult.error,
-    },
     message:
       uniqueSlotStarts.length === 1
         ? "Your slot is booked. We will see you at Nexus Cafe."

@@ -65,12 +65,28 @@ export const sendBookingConfirmationEmail = async (data: BookingConfirmationData
       </html>
     `;
 
+    // Format the from address properly for Resend
+    const fromEmail = process.env.CUSTOMER_EMAIL_FROM || "onboarding@resend.dev";
+    const fromAddress = fromEmail.includes("@gmail.com") 
+      ? `Nexus Arena <${fromEmail}>` 
+      : fromEmail;
+
+    const toEmail = customerEmail || process.env.CUSTOMER_EMAIL_TO || "";
+
+    console.log("📧 Sending booking confirmation email", {
+      from: fromAddress,
+      to: toEmail,
+      subject: `Booking Confirmed - Nexus Arena Cafe - ${bookingDate}`,
+    });
+
     const response = await resend.emails.send({
-      from: process.env.CUSTOMER_EMAIL_FROM || "onboarding@resend.dev",
-      to: customerEmail || process.env.CUSTOMER_EMAIL_TO || "",
+      from: fromAddress,
+      to: toEmail,
       subject: `Booking Confirmed - Nexus Arena Cafe - ${bookingDate}`,
       html: htmlContent,
     });
+
+    console.log("✅ Email sent successfully", { messageId: response.data?.id });
 
     return {
       success: true,
@@ -79,6 +95,7 @@ export const sendBookingConfirmationEmail = async (data: BookingConfirmationData
     };
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+    console.error("❌ Email sending failed", { error: errorMessage });
     return {
       success: false,
       messageId: null,
