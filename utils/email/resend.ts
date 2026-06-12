@@ -1,7 +1,5 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 interface BookingConfirmationData {
   customerName: string;
   customerEmail: string;
@@ -33,6 +31,8 @@ export const sendBookingConfirmationEmail = async (data: BookingConfirmationData
         error: errorMsg,
       };
     }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const { customerName, customerEmail, bookingDate, slotLabels, mobileNumber } = data;
 
@@ -68,20 +68,20 @@ export const sendBookingConfirmationEmail = async (data: BookingConfirmationData
     `;
 
     // Use the from address from env
-    const fromAddress = process.env.CUSTOMER_EMAIL_FROM || "Nexus Cafe <onboarding@resend.dev>";
+    const fromAddress = process.env.CUSTOMER_EMAIL_FROM || "Nexus Arena <onboarding@resend.dev>";
     const toEmail = customerEmail;
 
     console.log("📧 Sending booking confirmation email", {
       from: fromAddress,
       to: toEmail,
-      subject: `Booking Confirmed - Nexus Arena Cafe - ${bookingDate}`,
+      subject: `Booking Confirmed - Nexus Arena - ${bookingDate}`,
       apiKeyExists: !!process.env.RESEND_API_KEY,
     });
 
     const response = await resend.emails.send({
       from: fromAddress,
       to: toEmail,
-      subject: `Booking Confirmed - Nexus Arena Cafe - ${bookingDate}`,
+      subject: `Booking Confirmed - Nexus Arena - ${bookingDate}`,
       html: htmlContent,
     });
 
